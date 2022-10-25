@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const cors = require('cors')
-const port = 5000
+const port = process.env.port || 5000
 app.use(cors())
 
 const category = require('./data/category.json')
@@ -17,6 +17,9 @@ app.get('/category/:id', (req, res) => {
     const id = req.params.id
     const coruseNumber = course.find(c => c.category_id == id)
     res.send(coruseNumber)
+})
+app.get('/allCourse', (req, res) => {
+    res.send(course)
 })
 
 app.listen(port, () => {
